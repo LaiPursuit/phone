@@ -45,7 +45,7 @@
         <span>确认细节</span>
         <span>安排过户</span>
       </div>
-      <br>
+      <br />
     </div>
     <van-goods-action>
       <van-goods-action-icon icon="home-o" text="首页" @click="toHome" />
@@ -90,13 +90,13 @@
     background-position: 0px 0;
   }
 }
-.step{
+.step {
   padding: 10px;
   position: absolute;
   top: 70px;
   font-size: 4vw;
 }
-.step span{
+.step span {
   padding-right: 6vw;
 }
 </style>
@@ -118,7 +118,7 @@ export default {
     var param = { number: this.$route.query.number, domain: "sq.dslhao.com" };
     this.npost(param);
     this.$store.commit("getCollection");
-    this.$store.state.title="靓号详情";
+    this.$store.state.title = "靓号详情";
   },
   methods: {
     npost(param) {
@@ -177,7 +177,20 @@ export default {
     },
     Share(option) {
       this.showShare = false;
+      var o = option;
       console.log(option);
+      if (o.name == "微信") {
+        Dialog({ message: "请点击微信右上角进行分享~" });
+      } else {
+        this.$copyText(window.location.href).then(
+          function () {
+            alert("Copied");
+          },
+          function () {
+            alert("Can not copy");
+          }
+        );
+      }
     },
     onGo() {
       this.$router.push("/advisory");
