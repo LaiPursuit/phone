@@ -12,7 +12,7 @@
             <td style="width:40%">运营商</td>
             <td style="width:60%">{{detail.operator}}</td>
           </tr>
-          <tr class="p-tab-tr"  v-for="(l,item) in detail.info" :key="item">
+          <tr class="p-tab-tr" v-for="(l,item) in detail.info" :key="item">
             <td style="width:40%">{{l.name}}</td>
             <td :class="l.name=='价格'?'price':''" style="width:60%;text-align: left;">{{l.content}}</td>
           </tr>
@@ -25,27 +25,27 @@
     </div>
     <div class="card">
       <p class="p-p">交易流程</p>
-      <van-steps active="-1" style="padding:0 20px">
-        <van-step>
-          <van-icon name="completed" size="6vw" />
-        </van-step>
-        <van-step>
-          <van-icon name="service-o" size="6vw" />
-        </van-step>
-        <van-step>
-          <van-icon name="description" size="6vw" />
-        </van-step>
-        <van-step>
-          <van-icon name="passed" size="6vw" />
-        </van-step>
-      </van-steps>
       <div class="step">
-        <span>选好下单</span>
-        <span>客服联系</span>
-        <span>确认细节</span>
-        <span>安排过户</span>
+        <div class="step-item">
+          <van-icon name="completed" size="6vw" />
+          <p>选好下单</p>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-item">
+          <van-icon name="service-o" size="6vw" />
+          <p>客服联系</p>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-item">
+          <van-icon name="description" size="6vw" />
+          <p>确认细节</p>
+          <div class="step-line"></div>
+        </div>
+        <div class="step-item">
+          <van-icon name="passed" size="6vw" />
+          <p>安排过户</p>
+        </div>
       </div>
-      <br />
     </div>
     <van-goods-action>
       <van-goods-action-icon icon="home-o" text="首页" @click="toHome" />
@@ -68,7 +68,7 @@
   font-size: 30px;
   font-weight: 600;
   background-size: 100vw 100%;
-  background-image: linear-gradient(90deg, #ff8c40, #ff4040,#ff8c40);
+  background-image: linear-gradient(90deg, #ff8c40, #ff4040, #ff8c40);
   text-align: center;
   animation: lg 2s ease-in-out infinite;
 }
@@ -81,13 +81,29 @@
   }
 }
 .step {
+  position: relative;
   padding: 10px;
-  position: absolute;
-  top: 70px;
   font-size: 4vw;
+  margin-bottom: 10px;
 }
-.step span {
-  padding-right: 6vw;
+.step-item {
+  position: relative;
+  width: 25%;
+  text-align: center;
+  display: inline-block;
+}
+.step p {
+  margin: 0;
+  font-size: 3vw;
+}
+.step-line {
+  position: absolute;
+  top: 25%;
+  left: 75%;
+  width: 50%;
+  height: 0.4vw;
+  border-radius: 0.4vw;
+  background: #dedede;
 }
 </style>
 <script>
