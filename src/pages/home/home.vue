@@ -51,16 +51,36 @@
           <van-dropdown-item title="规则" v-model="mR_v" @close="post" :options="mRules" />
           <van-dropdown-item title="更多" ref="more" @close="post">
             <van-cell-group title="价格">
-              <van-checkbox-group class="p-box" direction="horizontal" ref="pay" v-model="pay_v">
-                <van-checkbox v-for="(p,item) in pays" :key="item" :name="p.id">{{p.name}}</van-checkbox>
+              <van-checkbox-group
+                class="m-chk-box"
+                direction="horizontal"
+                ref="pay"
+                v-model="pay_v"
+              >
+                <van-checkbox
+                  class="m-chk"
+                  v-for="(p,item) in pays"
+                  :key="item"
+                  :name="p.id"
+                >{{p.name}}</van-checkbox>
               </van-checkbox-group>
             </van-cell-group>
-            <van-cell-group title="偏好">
+            <van-cell-group style="padding: 8px;" title="偏好">
               <van-checkbox-group direction="horizontal" ref="like" v-model="like_v">
-                <van-checkbox v-for="(l,item) in likes" :key="item" :name="l.id">{{l.name}}</van-checkbox>
+                <van-checkbox
+                  class="m-chk"
+                  v-for="(l,item) in likes"
+                  :key="item"
+                  :name="l.id"
+                >{{l.name}}</van-checkbox>
               </van-checkbox-group>
               <van-checkbox-group direction="horizontal" ref="f" v-model="f_v">
-                <van-checkbox v-for="(f,item) in f" :key="item" :name="f.id">{{f.name}}</van-checkbox>
+                <van-checkbox
+                  class="m-chk"
+                  v-for="(f,item) in f"
+                  :key="item"
+                  :name="f.id"
+                >{{f.name}}</van-checkbox>
               </van-checkbox-group>
               <input
                 type="number"
@@ -70,8 +90,10 @@
               />
               <br />
             </van-cell-group>
-            <van-button style="width:40%;margin:5%" @click="more_r">重置</van-button>
-            <van-button style="width:40%;margin:5%;" type="info" @click="more_over">确认</van-button>
+            <div style="position:sticky;background:#fff;width:100%;bottom:0">
+              <van-button style="width:40%;margin:5%" @click="more_r">重置</van-button>
+              <van-button style="width:40%;margin:5%;" type="info" @click="more_over">确认</van-button>
+            </div>
           </van-dropdown-item>
           <van-dropdown-item title="排序" v-model="sort_v" @close="post" :options="sorts" />
         </van-dropdown-menu>
@@ -86,7 +108,12 @@
       >
         <table class="p-tab">
           <tbody class="p-tab-body">
-            <router-link :to="'/phone?number='+p.number" animationType='pop-in' v-for="(p,item) in pn_list" :key="item">
+            <router-link
+              :to="'/phone?number='+p.number"
+              animationType="pop-in"
+              v-for="(p,item) in pn_list"
+              :key="item"
+            >
               <tr class="p-tab-tr">
                 <td style="width:35%">{{p.number}}</td>
                 <td style="width:32%">{{p.info}}</td>
@@ -99,7 +126,7 @@
       </van-list>
     </div>
 
-    <navbar/>
+    <navbar />
   </div>
 </template>
 <style>
@@ -123,13 +150,22 @@
   font-size: 4vw;
   padding: 0 3vw;
 }
+.m-chk-box {
+  padding: 8px;
+}
+.m-chk {
+  margin: 5px 0;
+  margin-left: 2%;
+  margin-right: 1% !important;
+  width: 30%;
+}
 </style>
 <script>
 import { Dialog } from "vant";
 import navbar from "../../components/navbar";
 export default {
-  components:{
-    navbar
+  components: {
+    navbar,
   },
   data() {
     return {
@@ -159,6 +195,10 @@ export default {
     post() {
       let param = {};
       let rule = [];
+      //不喜欢的数字
+      if (this.exclude) {
+        this.$set(param, "exclude", this.exclude);
+      }
       //归属地
       if (this.area) {
         let regional = this.area;
@@ -291,7 +331,7 @@ export default {
       this.gpost(this.param, 1);
     },
     changeArea(picker, value, index) {
-      console.log(index)
+      console.log(index);
       if (value[1].code) {
         this.area = value[1].code;
       } else {
@@ -343,7 +383,7 @@ export default {
     this.post();
     var param = '{"domain":"sq.dslhao.com"}';
     this.$store.commit("getIndex", param);
-    this.$store.state.title="靓号(标题)";
+    this.$store.state.title = "靓号(标题)";
   },
 };
 </script>

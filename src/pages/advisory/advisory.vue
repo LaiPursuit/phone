@@ -29,7 +29,7 @@
           <p class="a-p-p">专享客服</p>
         </div>
       </div>
-      <van-empty :image="img" description="长按二维码咨询您的专属客服" />
+      <van-empty :image="require('../../assets/wx.jpg')" description="长按二维码咨询您的专属客服" />
     </div>
     <navbar />
   </div>
@@ -58,11 +58,6 @@ import navbar from "../../components/navbar";
 export default {
   components: {
     navbar,
-  },
-  data() {
-    return {
-      img: require("../../assets/wx.jpg"),
-    };
   },
 };
 </script>
