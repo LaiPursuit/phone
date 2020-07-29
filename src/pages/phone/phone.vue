@@ -12,9 +12,9 @@
             <td style="width:40%">运营商</td>
             <td style="width:60%">{{detail.operator}}</td>
           </tr>
-          <tr class="p-tab-tr" v-for="(l,item) in detail.info" :key="item">
+          <tr class="p-tab-tr"  v-for="(l,item) in detail.info" :key="item">
             <td style="width:40%">{{l.name}}</td>
-            <td style="width:60%">{{l.content}}</td>
+            <td :class="l.name=='价格'?'price':''" style="width:60%;text-align: left;">{{l.content}}</td>
           </tr>
           <tr class="p-tab-tr">
             <td style="width:40%">详细介绍</td>
@@ -65,29 +65,19 @@
 .phone-box {
   padding: 20px 30px;
   color: #ffffff;
-  background-size: 60px 60px;
-  background: linear-gradient(
-    135deg,
-    #fa7952 0%,
-    #fa7952 25%,
-    #faa352 25%,
-    #faa352 50%,
-    #fa7952 50%,
-    #fa7952 75%,
-    #faa352 75%,
-    #faa352 100%
-  );
+  font-size: 30px;
+  font-weight: 600;
+  background-size: 100vw 100%;
+  background-image: linear-gradient(90deg, #ff8c40, #ff4040,#ff8c40);
   text-align: center;
-  animation: lg 4s ease-in-out infinite;
+  animation: lg 2s ease-in-out infinite;
 }
 @keyframes lg {
   0% {
-  }
-  50% {
-    background-position: 60px 0;
+    background-position: 0 0;
   }
   100% {
-    background-position: 0px 0;
+    background-position: 100vw 0;
   }
 }
 .step {
@@ -182,14 +172,7 @@ export default {
       if (o.name == "微信") {
         Dialog({ message: "请点击微信右上角进行分享~" });
       } else {
-        this.$copyText(window.location.href).then(
-          function () {
-            alert("Copied");
-          },
-          function () {
-            alert("Can not copy");
-          }
-        );
+        this.$copyText(window.location.href);
       }
     },
     onGo() {
